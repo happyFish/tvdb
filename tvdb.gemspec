@@ -25,17 +25,17 @@ Gem::Specification.new do |s|
      "lib/tvdb.rb",
      "lib/tvdb/client.rb",
      "lib/tvdb/element.rb",
-     "lib/tvdb/serie.rb",
+     "lib/tvdb/series.rb",
      "lib/tvdb/urls.rb",
-     "spec/data/serie1.xml",
-     "spec/data/serie1.zip",
-     "spec/data/serie2.xml",
-     "spec/data/serie2.zip",
+     "spec/data/series1.xml",
+     "spec/data/series1.zip",
+     "spec/data/series2.xml",
+     "spec/data/series2.zip",
      "spec/spec.opts",
      "spec/spec_helper.rb",
      "spec/tvdb/client_spec.rb",
      "spec/tvdb/element_spec.rb",
-     "spec/tvdb/serie_spec.rb",
+     "spec/tvdb/series_spec.rb",
      "spec/tvdb/urls_spec.rb",
      "tvdb.gemspec"
   ]
@@ -48,7 +48,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
      "spec/tvdb/client_spec.rb",
      "spec/tvdb/element_spec.rb",
-     "spec/tvdb/serie_spec.rb",
+     "spec/tvdb/series_spec.rb",
      "spec/tvdb/urls_spec.rb"
   ]
 

@@ -22,19 +22,19 @@ module TVdb
       end
       
       ids.map do |sid|
-        get_serie_from_zip(sid, options[:lang])
+        get_series_from_zip(sid, options[:lang])
       end.compact
     end
     
-    def serie_in_language(serie, lang)
+    def series_in_language(serie, lang)
       return nil if !serie.respond_to?(:tvdb_id)
-      return serie if lang == serie.language
+      return series if lang == serie.language
       
-      get_serie_from_zip(serie.tvdb_id, lang)
+      get_series_from_zip(serie.tvdb_id, lang)
     end
     
-    def get_serie_zip(id, lang='en')
-      zip_file = open_or_rescue(@urls[:serie_zip] % {:serie_id => id, :language => lang})
+    def get_series_zip(id, lang='en')
+      zip_file = open_or_rescue(@urls[:series_zip] % {:series_id => id, :language => lang})
       zip_file.nil? ? nil : Zip::ZipFile.new(zip_file.path)
     end
     
@@ -48,15 +48,15 @@ module TVdb
       end
     end
     
-    def get_serie_from_zip(sid, lang='en')
-      zip = get_serie_zip(sid, lang)
+    def get_series_from_zip(sid, lang='en')
+      zip = get_series_zip(sid, lang)
       return nil if zip.nil?
       
-      xml = read_serie_xml_from_zip(zip, lang)
-      return xml ? Serie.new(xml) : nil
+      xml = read_series_xml_from_zip(zip, lang)
+      return xml ? Series.new(xml) : nil
     end
     
-    def read_serie_xml_from_zip(zip, lang='en')
+    def read_series_xml_from_zip(zip, lang='en')
       if entry = zip.find_entry("#{lang}.xml")
         entry.get_input_stream.read
       end

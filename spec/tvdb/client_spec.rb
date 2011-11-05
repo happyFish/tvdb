@@ -16,13 +16,13 @@ module TVdb
       @client.urls[:serie_xml].template.should match /^http:\/\/www\.thetvdb\.com\/api\/api_key/
     end
     
-    describe "get serie full data on zip" do
-      it "should request the TheTVDB serie zip url" do
+    describe "get series full data on zip" do
+      it "should request the TheTVDB series zip url" do
         OpenURI.should_receive(:open_uri).with(@client.urls[:serie_zip] % {:serie_id => "123987", :language => "en"}).and_return(@serie1_zip)
         @client.get_serie_zip("123987")
       end
       
-      it "should request the TheTVDB serie zip url in given language" do
+      it "should request the TheTVDB series zip url in given language" do
         OpenURI.should_receive(:open_uri).with(@client.urls[:serie_zip] % {:serie_id => "123987", :language => "de"}).and_return(@serie1_zip)
         @client.get_serie_zip("123987", 'de')
       end
@@ -101,18 +101,18 @@ module TVdb
       end
     end
     
-    describe "get serie in other language" do
+    describe "get series in other language" do
       it "should avoid empty series" do
-        @client.serie_in_language(Serie.new(""), "es").should be_nil
+        @client.serie_in_language(Series.new(""), "es").should be_nil
       end
       
-      it "should give the serie itself when language is the same" do
-        serie = Serie.new(@serie1_xml)
+      it "should give the series itself when language is the same" do
+        series = Series.new(@serie1_xml)
         @client.serie_in_language(serie, "en").should == serie
       end
       
-      it "should get the serie with information in the given language" do        
-        original = Serie.new("<Series><id>4815162342</id></Series>")
+      it "should get the series with information in the given language" do        
+        original = Series.new("<Series><id>4815162342</id></Series>")
         zip_mock = mock "ZipFile"
         
         @client.stub!(:get_serie_zip).and_return(zip_mock)
@@ -123,8 +123,8 @@ module TVdb
         translated.overview.should == "¿Qué quieren decir esos números?"
       end
       
-      it "should return nil if there is no serie info" do
-        original = Serie.new("<Series><id>4815162342</id></Series>")
+      it "should return nil if there is no series info" do
+        original = Series.new("<Series><id>4815162342</id></Series>")
         @client.should_receive(:get_serie_zip).with("4815162342", "es").and_return(nil)
         @client.serie_in_language(original, "es").should be_nil
       end

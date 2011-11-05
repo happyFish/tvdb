@@ -25,7 +25,7 @@ module TVdb
     end
     
     it "should reference its templates" do
-      @urls[:serie_url].should == @urls.templates[:serie_url]
+      @urls[:series_url].should == @urls.templates[:series_url]
     end
   end
   

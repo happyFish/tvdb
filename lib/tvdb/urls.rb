@@ -3,10 +3,10 @@ module TVdb
     BASE_URL = "http://www.thetvdb.com"
     URLS = {
       :get_series => "%s/api/GetSeries.php?seriesname={{name}}&language={{language}}",
-      :serie_xml => "%s/api/%s/series/{{serie_id}}/{{language}}.xml",
-      :serie_full_xml => "%s/api/%s/series/{{serie_id}}/all/{{language}}.xml",
-      :serie_banners_xml => "%s/api/%s/series/{{serie_id}}/banners.xml",
-      :serie_zip => "%s/api/%s/series/{{serie_id}}/all/{{language}}.zip",
+      :series_xml => "%s/api/%s/series/{{series_id}}/{{language}}.xml",
+      :series_full_xml => "%s/api/%s/series/{{series_id}}/all/{{language}}.xml",
+      :series_banners_xml => "%s/api/%s/series/{{series_id}}/banners.xml",
+      :series_zip => "%s/api/%s/series/{{series_id}}/all/{{language}}.zip",
       :episode_xml => "%s/api/%s/episodes/{{episode_id}}/{{language}}.xml"
     }
     

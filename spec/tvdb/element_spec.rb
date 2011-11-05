@@ -6,7 +6,7 @@ module TVdb
       load_example_data
     end
     
-    it "should map id attribute to tvdb_id serie method" do
+    it "should map id attribute to tvdb_id series method" do
       element = Element.new("<Element><id>4815162342</id></Element>")
       element.tvdb_id.should == "4815162342"
       

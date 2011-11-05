@@ -1,5 +1,5 @@
 module TVdb
-  class Serie < Element
+  class Series < Element
     attr_accessor :episodes
     
     def initialize(xml)

@@ -7,7 +7,7 @@ Ruby wrapper for accessing TV shows information from the [TheTVDB](http://www.th
     require 'tvdb'
     client = TVdb::Client.new('my_api_key')
     results = client.search('The Big Bang Theory')
-    client.serie_in_language(results.first, 'fr')
+    client.series_in_language(results.first, 'fr')
     
 ## Copyright
 
