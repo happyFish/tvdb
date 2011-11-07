@@ -38,17 +38,17 @@ module TVdb
     it "should parse episodes and return them as an array of Element objects" do
       series = Series.new(@serie1_full_xml)
       
-      serie.episodes.size.should == 55 # There are 55 <Episode> tags in the zip file
+      series.episodes.size.should == 55 # There are 55 <Episode> tags in the zip file
       
-      serie.episodes.first.tvdb_id.should == '1102131'
-      serie.episodes.first.episodename.should == 'Physicist To The Stars'
-      serie.episodes.first.seriesid.should == serie.tvdb_id
+      series.episodes.first.tvdb_id.should == '1102131'
+      series.episodes.first.episodename.should == 'Physicist To The Stars'
+      series.episodes.first.seriesid.should == serie.tvdb_id
       
-      serie.episodes[1].tvdb_id.should == '1088021'
-      serie.episodes[1].episodename.should == 'Season 2 Gag Reel'
+      series.episodes[1].tvdb_id.should == '1088021'
+      series.episodes[1].episodename.should == 'Season 2 Gag Reel'
       
-      serie.episodes.last.tvdb_id.should == '1309961'
-      serie.episodes.last.episodename.should == 'The Maternal Congruence'
+      series.episodes.last.tvdb_id.should == '1309961'
+      series.episodes.last.episodename.should == 'The Maternal Congruence'
     end
     
   end
