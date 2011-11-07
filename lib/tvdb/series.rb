@@ -2,8 +2,6 @@ module TVdb
   class Series < Element
     attr_accessor :episodes
     
-    set_table_name 'series'
-    
     def initialize(xml)
       doc = Hpricot(xml)
       

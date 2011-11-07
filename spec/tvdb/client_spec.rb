@@ -18,12 +18,12 @@ module TVdb
     
     describe "get series full data on zip" do
       it "should request the TheTVDB series zip url" do
-        OpenURI.should_receive(:open_uri).with(@client.urls[:series_zip] % {:series_id => "123987", :language => "en"}).and_return(@serie1_zip)
+        OpenURI.should_receive(:open_uri).with(@client.urls[:series_zip] % {:series_id => "123987", :language => "en"}).and_return(@series1_zip)
         @client.get_series_zip("123987")
       end
       
       it "should request the TheTVDB series zip url in given language" do
-        OpenURI.should_receive(:open_uri).with(@client.urls[:series_zip] % {:series_id => "123987", :language => "de"}).and_return(@serie1_zip)
+        OpenURI.should_receive(:open_uri).with(@client.urls[:series_zip] % {:series_id => "123987", :language => "de"}).and_return(@series1_zip)
         @client.get_series_zip("123987", 'de')
       end
       
@@ -38,12 +38,12 @@ module TVdb
     
     describe "search" do
       it "should request the TheTVDB search uri with given name" do
-        OpenURI.should_receive(:open_uri).with(@client.urls[:get_series] % {:name => URI.escape("Best show"), :language => "en"}).and_return(@serie1_zip)
+        OpenURI.should_receive(:open_uri).with(@client.urls[:get_series] % {:name => URI.escape("Best show"), :language => "en"}).and_return(@series1_zip)
         @client.search("Best show")
       end
       
       it "should request the TheTVDB search uri with given name and language" do
-        OpenURI.should_receive(:open_uri).with(@client.urls[:get_series] % {:name => URI.escape("Best show"), :language => "de"}).and_return(@serie1_zip)
+        OpenURI.should_receive(:open_uri).with(@client.urls[:get_series] % {:name => URI.escape("Best show"), :language => "de"}).and_return(@series1_zip)
         @client.search("Best show", {:lang => "de"})
       end
       
@@ -66,12 +66,12 @@ module TVdb
       it "should return the Series corresponding to each response" do
         OpenURI.should_receive(:open_uri).and_return(StringIO.new(@series_xml))
         
-        @client.should_receive(:get_series_zip).with("80379", "en").and_return(Zip::ZipFile.new(@serie1_zip.path))
-        @client.should_receive(:get_series_zip).with("73739", "en").and_return(Zip::ZipFile.new(@serie2_zip.path))
+        @client.should_receive(:get_series_zip).with("80379", "en").and_return(Zip::ZipFile.new(@series1_zip.path))
+        @client.should_receive(:get_series_zip).with("73739", "en").and_return(Zip::ZipFile.new(@series2_zip.path))
         
         results = @client.search("something")
         results.size.should == 2
-        results.each{|r| r.class.should == TVdb::Serie}
+        results.each{|r| r.class.should == TVdb::Series}
         results.map(&:seriesname).sort.should == ["Lost", "The Big Bang Theory"]
       end
       
@@ -83,7 +83,7 @@ module TVdb
         XML
         ))
         
-        @client.should_receive(:get_series_zip).once.with("73739", "en").and_return(Zip::ZipFile.new(@serie2_zip.path))
+        @client.should_receive(:get_series_zip).once.with("73739", "en").and_return(Zip::ZipFile.new(@series2_zip.path))
         results = @client.search("Lost", :match_mode => :exact)
         results.size.should == 1
         results.first.seriesname.should == "Lost"
@@ -92,7 +92,7 @@ module TVdb
       it "should skip unreachable results" do
         OpenURI.should_receive(:open_uri).and_return(StringIO.new(@series_xml))
         
-        @client.should_receive(:get_series_zip).with("80379", "en").and_return(Zip::ZipFile.new(@serie1_zip.path))
+        @client.should_receive(:get_series_zip).with("80379", "en").and_return(Zip::ZipFile.new(@series1_zip.path))
         @client.should_receive(:get_series_zip).with("73739", "en").and_return(nil)
         
         results = @client.search("something")
@@ -107,8 +107,8 @@ module TVdb
       end
       
       it "should give the series itself when language is the same" do
-        series = Series.new(@serie1_xml)
-        @client.series_in_language(serie, "en").should == serie
+        series = Series.new(@series1_xml)
+        @client.series_in_language(series, "en").should == series
       end
       
       it "should get the series with information in the given language" do        

@@ -26,11 +26,11 @@ module TVdb
       end.compact
     end
     
-    def series_in_language(serie, lang)
-      return nil if !serie.respond_to?(:tvdb_id)
-      return series if lang == serie.language
+    def series_in_language(series, lang)
+      return nil if !series.respond_to?(:tvdb_id)
+      return series if lang == series.language
       
-      get_series_from_zip(serie.tvdb_id, lang)
+      get_series_from_zip(series.tvdb_id, lang)
     end
     
     def get_series_zip(id, lang='en')
